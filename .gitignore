@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+tasks/*/node_modules/
+
+# Build outputs
+dist/
+*.vsix
+
+# Unused/internal files
+non_used/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+

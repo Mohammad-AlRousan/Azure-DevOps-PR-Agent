@@ -1,0 +1,256 @@
+{
+  "id": "8f9e7d6c-5b4a-3928-1716-0504a3b2c1d0",
+  "name": "DevOpsPRAgentAnalyze",
+  "friendlyName": "DevOps PR Agent Analyze",
+  "description": "AI-powered analysis of pull requests with automated code review, security scanning, and quality assessment",
+  "author": "Mohammad Al Rousan (Azure-Heroes.com)",
+  "helpMarkDown": "This task performs AI-powered analysis of your code changes including code review, security scanning, compliance checks, and quality assessment. [More Information](https://github.com/DevOps-PR-Review/azure-devops-pr-agent)",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "3",
+    "Minor": "12",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "3.248.0",
+  "instanceNameFormat": "PR Agent: $(analysisType)",
+  "groups": [
+    {
+      "name": "apiConfiguration",
+      "displayName": "API Configuration",
+      "isExpanded": true
+    },
+    {
+      "name": "analysisOptions",
+      "displayName": "Analysis Options",
+      "isExpanded": true
+    },
+    {
+      "name": "outputOptions",
+      "displayName": "Output Options",
+      "isExpanded": false
+    },
+    {
+      "name": "advanced",
+      "displayName": "Advanced Options",
+      "isExpanded": false
+    }
+  ],
+  "inputs": [
+    {
+      "name": "analysisType",
+      "type": "pickList",
+      "label": "Analysis Type",
+      "defaultValue": "review",
+      "required": true,
+      "helpMarkDown": "The type of AI analysis to perform on the code changes.",
+      "options": {
+        "review": "Code Review",
+        "improve": "Improvement Suggestions",
+        "tests": "Test Generation",
+        "compliance": "Compliance Check",
+        "security": "Security Scan",
+        "auto-approve": "Auto-Approval Assessment",
+        "describe": "PR Description Generation",
+        "ask": "Ask Questions About Changes",
+        "all": "Comprehensive Analysis (All Features - 7 separate comments)"
+      },
+      "properties": {
+        "EditableOptions": "False"
+      },
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "apiEndpoint",
+      "type": "string",
+      "label": "Azure OpenAI Endpoint (Optional)",
+      "required": false,
+      "helpMarkDown": "Azure OpenAI endpoint URL. Can also be set via AZURE_OPENAI_ENDPOINT environment variable. Example: https://your-openai.openai.azure.com/",
+      "groupName": "apiConfiguration"
+    },
+    {
+      "name": "apiKey",
+      "type": "string",
+      "label": "Azure OpenAI API Key (Optional)",
+      "required": false,
+      "helpMarkDown": "Azure OpenAI API key. Can also be set via AZURE_OPENAI_API_KEY environment variable. Use secret variables for security.",
+      "groupName": "apiConfiguration"
+    },
+    {
+      "name": "deploymentName",
+      "type": "string",
+      "label": "Azure OpenAI Deployment Name",
+      "defaultValue": "gpt-4.1",
+      "required": false,
+      "helpMarkDown": "Name of your Azure OpenAI deployment (e.g., gpt-4.1, gpt-35-turbo). Only needed for Azure OpenAI endpoints.",
+      "groupName": "apiConfiguration"
+    },
+    {
+      "name": "apiVersion",
+      "type": "string",
+      "label": "Azure OpenAI API Version",
+      "defaultValue": "2024-02-15-preview",
+      "required": false,
+      "helpMarkDown": "Azure OpenAI API version to use. Default is 2024-02-15-preview.",
+      "groupName": "apiConfiguration"
+    },
+    {
+      "name": "prUrl",
+      "type": "string",
+      "label": "PR URL (Optional)",
+      "required": false,
+      "helpMarkDown": "Specific PR URL to analyze. If not provided, will auto-detect from pipeline context. Format: https://dev.azure.com/org/project/_git/repo/pullrequest/123",
+      "groupName": "apiConfiguration"
+    },
+    {
+      "name": "sourceDirectory",
+      "type": "filePath",
+      "label": "Source Directory",
+      "defaultValue": "$(Build.SourcesDirectory)",
+      "helpMarkDown": "Directory containing the source code to analyze. Defaults to the build sources directory.",
+      "required": false,
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "includePatterns",
+      "type": "multiLine",
+      "label": "Include File Patterns",
+      "helpMarkDown": "File patterns to include in analysis (one per line). Examples: *.js, *.ts, src/**/*.py. Leave empty to analyze all files.",
+      "required": false,
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "excludePatterns",
+      "type": "multiLine",
+      "label": "Exclude File Patterns",
+      "helpMarkDown": "File patterns to exclude from analysis (one per line). Examples: node_modules/**, *.test.js, dist/**",
+      "required": false,
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "enableSecurityScan",
+      "type": "boolean",
+      "label": "Enable Security Scanning",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Include security vulnerability detection in the analysis",
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "enableComplianceCheck",
+      "type": "boolean",
+      "label": "Enable Compliance Checking",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Include coding standards and compliance validation",
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "qualityThreshold",
+      "type": "string",
+      "label": "Quality Threshold (%)",
+      "defaultValue": "80",
+      "required": false,
+      "helpMarkDown": "Minimum quality score threshold (0-100). Analysis will fail if score is below this value.",
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "securityThreshold",
+      "type": "string",
+      "label": "Security Threshold (%)",
+      "defaultValue": "90",
+      "required": false,
+      "helpMarkDown": "Minimum security score threshold (0-100). Analysis will fail if score is below this value.",
+      "groupName": "analysisOptions"
+    },
+    {
+      "name": "outputFormat",
+      "type": "pickList",
+      "label": "Output Format",
+      "defaultValue": "json",
+      "required": false,
+      "helpMarkDown": "Format for the analysis results output",
+      "options": {
+        "json": "JSON",
+        "markdown": "Markdown",
+        "junit": "JUnit XML",
+        "sarif": "SARIF"
+      },
+      "properties": {
+        "EditableOptions": "False"
+      },
+      "groupName": "outputOptions"
+    },
+    {
+      "name": "outputFile",
+      "type": "string",
+      "label": "Output File Path",
+      "helpMarkDown": "Path where analysis results will be saved. Leave empty to output to console only.",
+      "required": false,
+      "groupName": "outputOptions"
+    },
+    {
+      "name": "publishResults",
+      "type": "boolean",
+      "label": "Publish Test Results",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Publish analysis results as test results in Azure DevOps",
+      "groupName": "outputOptions"
+    },
+    {
+      "name": "createWorkItems",
+      "type": "boolean",
+      "label": "Create Work Items for Issues",
+      "defaultValue": "false",
+      "required": false,
+      "helpMarkDown": "Automatically create work items for critical issues found during analysis",
+      "groupName": "outputOptions"
+    },
+    {
+      "name": "timeout",
+      "type": "string",
+      "label": "Timeout (minutes)",
+      "defaultValue": "10",
+      "required": false,
+      "helpMarkDown": "Maximum time to wait for analysis completion (in minutes)",
+      "groupName": "advanced"
+    },
+    {
+      "name": "retryCount",
+      "type": "string",
+      "label": "Retry Count",
+      "defaultValue": "3",
+      "required": false,
+      "helpMarkDown": "Number of times to retry the analysis if it fails",
+      "groupName": "advanced"
+    },
+    {
+      "name": "customPrompt",
+      "type": "multiLine",
+      "label": "Custom Analysis Prompt",
+      "helpMarkDown": "Custom instructions for the AI analysis. This will be added to the default analysis prompt.",
+      "required": false,
+      "groupName": "advanced"
+    },
+    {
+      "name": "enableTelemetry",
+      "type": "boolean",
+      "label": "Enable Telemetry",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Allow collection of anonymous usage telemetry to improve the extension",
+      "groupName": "advanced"
+    }
+  ],
+  "execution": {
+    "Node20_1": {
+      "target": "index.js",
+      "argumentFormat": ""
+    }
+  }
+}

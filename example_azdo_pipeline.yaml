@@ -1,0 +1,105 @@
+# Azure DevOps PR Agent Pipeline - Extension Version
+# This pipeline runs AI-powered analysis on pull requests using DevOps extension
+
+trigger:
+  - none
+
+pr:
+  branches:
+    include:
+      - '*'
+
+variables:
+  # Use the same variable group as the secure pipeline for consistency
+  - group: 'PR-Agent-Secrets'  # Contains AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_NAME
+
+stages:
+- stage: pr_agent_analysis
+  displayName: '🔍 PR Agent Analysis'
+  jobs:
+  - job: pr_agent_extension
+    displayName: '🧠 AI-Powered PR Analysis (Extension)'
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - checkout: self
+      fetchDepth: 0
+      displayName: '📥 Checkout Source Code'
+
+    - script: |
+        echo "🔍 Starting PR Agent Analysis using Extension..."
+        echo "Build Reason: $(Build.Reason)"
+        echo "Source Branch: $(System.PullRequest.SourceBranch)"
+        echo "Target Branch: $(System.PullRequest.TargetBranch)"
+        echo "PR ID: $(System.PullRequest.PullRequestId)"
+        
+        # Construct PR URL dynamically
+        ORGANIZATION_URL="$(System.CollectionUri)"
+        PROJECT_NAME="$(System.TeamProject)"
+        REPO_NAME="$(Build.Repository.Name)"
+        PR_ID="$(System.PullRequest.PullRequestId)"
+        
+        # Remove trailing slash from organization URL
+        ORGANIZATION_URL=${ORGANIZATION_URL%/}
+        
+        # Construct the full PR URL
+        PR_URL="${ORGANIZATION_URL}/${PROJECT_NAME}/_git/${REPO_NAME}/pullrequest/${PR_ID}"
+        
+        echo "🎯 Constructed PR URL: $PR_URL"
+        echo "##vso[task.setvariable variable=DYNAMIC_PR_URL]$PR_URL"
+      displayName: '🎯 Prepare PR Analysis Context'
+
+    - task: DevOpsPRAgentAnalyze@3
+      displayName: '🚀 Execute PR Agent Extension Analysis'
+      inputs:
+        analysisType: 'all'
+        apiEndpoint: $(AZURE_OPENAI_ENDPOINT)
+        apiKey: $(AZURE_OPENAI_API_KEY)
+        prUrl: $(DYNAMIC_PR_URL)
+        qualityThreshold: '70'
+        securityThreshold: '80'
+        outputFormat: 'junit'
+        deploymentName: $(AZURE_OPENAI_DEPLOYMENT_NAME)
+      env:
+        AZURE_DEVOPS_PAT: $(System.AccessToken)
+        AZURE_DEVOPS_ORG_URL: $(System.CollectionUri)
+        AZURE_OPENAI_API_VERSION: "2024-02-15-preview"
+        LOG_LEVEL: "INFO"
+      condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+
+    - script: |
+        echo "ℹ️ PR Agent Extension Analysis Summary:"
+        echo "- Analysis Type: Comprehensive (All Features)"
+        echo "- Target: PR #$(System.PullRequest.PullRequestId)"
+        echo "- Repository: $(Build.Repository.Name)"
+        echo "- Source Branch: $(System.PullRequest.SourceBranch)"
+        echo "- Target Branch: $(System.PullRequest.TargetBranch)"
+        echo "- Build ID: $(Build.BuildId)"
+        echo "- Quality Threshold: 70%"
+        echo "- Security Threshold: 80%"
+        echo ""
+        echo "🎉 Check your PR for AI-generated analysis comments!"
+        echo ""
+        echo "📊 Expected Analysis Features:"
+        echo "1. 📝 Describe - PR description and overview"
+        echo "2. 🔍 Review - Code quality assessment"
+        echo "3. 🚀 Improve - Performance improvements"
+        echo "4. 🧪 Tests - Test suggestions"
+        echo "5. 📋 Compliance - Standards compliance"
+        echo "6. ✅ Auto-Approve - Risk assessment"
+        echo "7. 🏷️ Labels - Smart labeling"
+      displayName: '📊 Extension Analysis Summary'
+      condition: always()
+
+# Instructions for using this pipeline:
+#
+# 1. Ensure the Variable Group 'PR-Agent-Secrets' exists in Azure DevOps Library
+# 2. The group should contain:
+#    - AZURE_OPENAI_ENDPOINT: Your Azure OpenAI endpoint URL
+#    - AZURE_OPENAI_API_KEY: Your Azure OpenAI API key
+#    - AZURE_OPENAI_DEPLOYMENT_NAME: Your deployment name (e.g., 'gpt-4')
+#
+# 3. Install the DevOpsPRAgentAnalyze extension from the marketplace
+# 4. Grant appropriate permissions to the Variable Group for this pipeline
+# 5. The pipeline will automatically detect PR context and construct the PR URL dynamically

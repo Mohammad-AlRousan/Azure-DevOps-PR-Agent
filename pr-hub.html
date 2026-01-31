@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure DevOps PR Agent</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #323130;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #323130;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            color: #605e5c;
+            font-size: 14px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .card {
+            border: 1px solid #edebe9;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .card h3 {
+            margin: 0 0 15px 0;
+            color: #323130;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .button {
+            padding: 10px 15px;
+            border: 1px solid #0078d4;
+            background-color: #0078d4;
+            color: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        .button.secondary {
+            background-color: transparent;
+            color: #0078d4;
+        }
+        .button:hover {
+            background-color: #106ebe;
+        }
+        .button.secondary:hover {
+            background-color: #f3f2f1;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .status-label {
+            color: #605e5c;
+        }
+        .status-value {
+            font-weight: 500;
+        }
+        .status-success {
+            color: #107c10;
+        }
+        .info-card {
+            background-color: #f8f9fa;
+        }
+        .info-card p {
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+            color: #605e5c;
+        }
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            border-top: 1px solid #edebe9;
+            color: #605e5c;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Azure DevOps PR Agent</h1>
+            <p>AI-powered code analysis and review for pull requests</p>
+        </div>
+
+        <div class="grid">
+            <!-- Quick Actions Card -->
+            <div class="card">
+                <h3>⚡ Quick Actions</h3>
+                <div>
+                    <button class="button" onclick="showInfo('analyze')">🔍 Analyze Current PR</button>
+                    <button class="button secondary" onclick="showInfo('history')">📊 View Analysis History</button>
+                    <button class="button secondary" onclick="showInfo('settings')">⚙️ Configure Settings</button>
+                </div>
+            </div>
+
+            <!-- Status Card -->
+            <div class="card">
+                <h3>📈 Status</h3>
+                <div class="status-item">
+                    <span class="status-label">Extension Status:</span>
+                    <span class="status-value status-success">✅ Active</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Pipeline Task:</span>
+                    <span class="status-value status-success">✅ Available</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Version:</span>
+                    <span class="status-value">3.10.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="card info-card">
+            <h3>ℹ️ How to Use PR Agent</h3>
+            <p><strong>Pipeline Integration:</strong> Add the DevOpsPRAgentAnalyze task to your Azure DevOps pipeline to automatically analyze pull requests.</p>
+            <p><strong>Analysis Types:</strong> Choose from review, security, improve, compliance, tests, or run all analyses.</p>
+            <p><strong>Multiple Comments:</strong> The 'all' analysis type posts separate comments for each analysis area.</p>
+            <p><strong>Configuration:</strong> Set up your Azure OpenAI endpoint and API key in pipeline variables.</p>
+        </div>
+
+        <div class="footer">
+            Azure DevOps PR Agent v3.10.0 • Powered by Azure OpenAI • Enterprise-Ready AI Code Analysis
+        </div>
+    </div>
+
+    <script>
+        function showInfo(action) {
+            switch(action) {
+                case 'analyze':
+                    alert('To analyze a PR, add the DevOpsPRAgentAnalyze task to your pipeline with analysisType: "all"');
+                    break;
+                case 'history':
+                    alert('Analysis history is available in your pipeline run logs and PR comments');
+                    break;
+                case 'settings':
+                    alert('Configure AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, and EXTENSION_KEY in your pipeline variables');
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

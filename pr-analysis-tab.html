@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background-color: #fff;
+            color: #323130;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            border-bottom: 1px solid #edebe9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0;
+            color: #323130;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card {
+            border: 1px solid #edebe9;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: #323130;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .button {
+            padding: 8px 12px;
+            border: 1px solid #0078d4;
+            background-color: #0078d4;
+            color: white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 3px 3px 3px 0;
+        }
+        .button.secondary {
+            background-color: transparent;
+            color: #0078d4;
+        }
+        .button:hover {
+            background-color: #106ebe;
+        }
+        .button.secondary:hover {
+            background-color: #f3f2f1;
+        }
+        .info-text {
+            color: #605e5c;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        .status-success {
+            color: #107c10;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>🤖 PR Analysis</h2>
+        </div>
+
+        <!-- Analysis Actions -->
+        <div class="card">
+            <h3>⚡ Quick Analysis</h3>
+            <div>
+                <button class="button" onclick="runAnalysis('review')">🔍 Review</button>
+                <button class="button" onclick="runAnalysis('security')">🔒 Security</button>
+                <button class="button" onclick="runAnalysis('improve')">⚡ Improve</button>
+                <button class="button" onclick="runAnalysis('all')">🎯 All</button>
+            </div>
+            <div class="info-text">
+                Run AI analysis on this pull request. Results will be posted as comments.
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="card">
+            <h3>📊 Analysis Status</h3>
+            <div class="status-item">
+                <span>Extension:</span>
+                <span class="status-success">✅ Ready</span>
+            </div>
+            <div class="status-item">
+                <span>Pipeline Task:</span>
+                <span class="status-success">✅ Available</span>
+            </div>
+            <div class="status-item">
+                <span>Version:</span>
+                <span>3.10.0</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="card">
+            <h3>📋 How to Use</h3>
+            <div class="info-text">
+                <p><strong>Automated Analysis:</strong> Add the DevOpsPRAgentAnalyze task to your pipeline:</p>
+                <pre>- task: DevOpsPRAgentAnalyze@3
+  inputs:
+    analysisType: 'all'
+  env:
+    AZURE_OPENAI_ENDPOINT: $(openai-endpoint)
+    AZURE_OPENAI_API_KEY: $(openai-key)
+    EXTENSION_KEY: 'XXXXXXX' # Contact us to get it
+    AZURE_DEVOPS_PAT: $(System.AccessToken)</pre>
+                <p><strong>Manual Analysis:</strong> Use the buttons above to run specific analysis types on this PR.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function runAnalysis(type) {
+            alert(`To run ${type} analysis, add the DevOpsPRAgentAnalyze task to your pipeline with analysisType: '${type}'`);
+        }
+    </script>
+</body>
+</html>

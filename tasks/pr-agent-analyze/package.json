@@ -1,0 +1,22 @@
+{
+  "name": "pr-agent-analyze-task",
+  "version": "1.0.0",
+  "description": "Azure DevOps task for PR Agent analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "azure-pipelines-task-lib": "^4.0.0"
+  },
+  "keywords": [
+    "azure-devops",
+    "pipeline",
+    "task",
+    "pr-agent",
+    "code-review",
+    "ai"
+  ],
+  "author": "DevOps-PR-Review",
+  "license": "MIT"
+}
