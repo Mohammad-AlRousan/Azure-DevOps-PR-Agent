@@ -62,10 +62,17 @@ The task will automatically analyze your pull request and post AI-generated comm
 | `AZURE_OPENAI_API_KEY` | Azure OpenAI API key |
 | `AZURE_DEVOPS_PAT` | Azure DevOps Personal Access Token |
 
+## 🤝 Open Source & Community
+
+This extension is **open source** and we welcome all contributors! Whether you're fixing bugs, improving docs, or adding features — your help is appreciated.
+
+⭐ **Star us on GitHub** to show your support!
+
 ## 🔗 Links
 
-- **GitHub**: [Azure-DevOps-PR-Agent](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
+- **GitHub**: [github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
 - **Issues**: [Report a bug](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/issues)
+- **Contribute**: [Fork the repo](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/fork)
 
 ## 📄 License
 
@@ -73,5 +80,5 @@ MIT License - see [LICENSE](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR
 
 ---
 
-*Powered by Azure OpenAI • Updated monthly with new features and bug fixes*
+*Powered by Azure OpenAI • Open Source • Updated monthly with new features and bug fixes*
 

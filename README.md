@@ -4,6 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Marketplace](https://img.shields.io/badge/Azure%20DevOps-Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=DevOps-PR-Review.azdo-pr-agent)
+[![GitHub](https://img.shields.io/badge/GitHub-Open%20Source-black?logo=github)](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
+[![Contributors Welcome](https://img.shields.io/badge/Contributors-Welcome-brightgreen)](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/issues)
 
 ## 📦 Install from Marketplace
 
@@ -106,15 +108,28 @@ npm run package       # Create VSIX package
 
 ## 🤝 Contributing
 
-Contributions are welcome! This is a community-driven project.
+**All contributors are welcome!** This is an open source, community-driven project and we'd love your help to make it better.
 
-**Areas where help is needed:**
+Whether you're fixing a typo, improving documentation, squashing bugs, or adding new features — every contribution matters! 🎉
 
-- 🐛 Bug fixes and issue resolution
-- 📝 Documentation improvements
-- ✨ New features and enhancements
-- 🧪 Testing and test coverage
-- 🔧 TypeScript code quality improvements
+### How to Contribute
+
+1. **Fork** the repository: [github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
+2. **Create** a feature branch: `git checkout -b my-feature`
+3. **Commit** your changes: `git commit -m "Add my feature"`
+4. **Push** to your fork: `git push origin my-feature`
+5. **Open** a Pull Request
+
+### Areas Where Help is Needed
+
+- 🐛 **Bug fixes** — Found a bug? Fix it and submit a PR!
+- 📝 **Documentation** — Help us improve guides and examples
+- ✨ **New features** — Have an idea? Let's discuss it!
+- 🧪 **Testing** — Help improve test coverage
+- 🔧 **Code quality** — TypeScript improvements welcome
+- 🌍 **Translations** — Help localize the extension
+
+> 💡 **First time contributing?** Look for issues labeled `good first issue`
 
 ---
 
@@ -143,4 +158,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ---
 
-**Found a bug?** [Open an issue](../../issues) · **Have a suggestion?** [Start a discussion](../../discussions)
+**Found a bug?** [Open an issue](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/issues) · **Have a suggestion?** [Start a discussion](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/discussions) · **Want to contribute?** [Fork the repo](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent/fork)
