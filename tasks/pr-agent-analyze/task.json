@@ -13,8 +13,8 @@
   "demands": [],
   "version": {
     "Major": "3",
-    "Minor": "12",
-    "Patch": "0"
+    "Minor": "11",
+    "Patch": "2"
   },
   "minimumAgentVersion": "3.248.0",
   "instanceNameFormat": "PR Agent: $(analysisType)",

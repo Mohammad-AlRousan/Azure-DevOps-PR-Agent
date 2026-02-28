@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "azdo-pr-agent",
   "publisher": "DevOps-PR-Review",
-  "version": "3.12.0",
+  "version": "3.11.2",
   "name": "Azure DevOps PR Agent",
   "description": "Enterprise AI-powered code analysis and review automation. Professional PR documentation, intelligent categorization, and comprehensive quality assessment.",
   "public": true,
