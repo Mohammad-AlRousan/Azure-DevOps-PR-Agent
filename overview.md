@@ -2,6 +2,10 @@
 
 🤖 **AI-powered code analysis and review for Azure DevOps pull requests**
 
+[![GitHub](https://img.shields.io/badge/GitHub-Open%20Source-black?logo=github)](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent) [![Contributors Welcome](https://img.shields.io/badge/Contributors-Welcome-brightgreen)](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
+
+> 📂 **Source Code**: [github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent](https://github.com/Mohammad-AlRousan/Azure-DevOps-PR-Agent)
+
 Transform your code review process with intelligent AI analysis that provides comprehensive feedback on code quality, security, performance, and best practices.
 
 ## ✨ Features
